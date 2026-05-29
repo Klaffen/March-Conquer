@@ -1,0 +1,47 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Export presets (contains personal paths, not project config)
+export_presets.cfg
+
+# Mono/C# specific
+.mono/
+data_*/
+mono_crash.*.json
+
+# Exported builds
+*.exe
+*.x86_64
+*.x86
+*.arm64
+*.app
+*.apk
+*.aab
+*.dmg
+*.pkg
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+.TemporaryItems
+.VolumeIcon.icns
+
+# VS Code
+.vscode/
+
+# JetBrains/Rider
+.idea/
+*.sln
+*.csproj

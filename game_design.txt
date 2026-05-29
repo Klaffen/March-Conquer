@@ -1,0 +1,88 @@
+================================================================================
+                          GAME DESIGN DOCUMENT (DRAFT)
+                            [Working Title: WAR / RTS]
+================================================================================
+
+GENRE
+  Real-Time Strategy (RTS) — Idle/Management hybrid
+
+--------------------------------------------------------------------------------
+CORE CONCEPT
+--------------------------------------------------------------------------------
+  A resource-gathering RTS where the player recruits workers to harvest the
+  environment, constructs buildings, and trains troops that automatically march
+  toward the enemy's castle. The player cannot directly control units — victory
+  comes from smart base management, not micromanagement.
+
+  Objective: Destroy the enemy's castle.
+
+--------------------------------------------------------------------------------
+RESOURCE GATHERING
+--------------------------------------------------------------------------------
+  - Workers are recruited units that autonomously chop trees and mine rocks.
+  - Harvesting clears space for building and yields resources.
+  - Player starts with 1 worker. Additional workers are recruited using Gold.
+  - Workers automatically find and move to the nearest available resource node.
+
+  Resources:
+    - Wood       (from trees)
+    - Stone      (from rocks)
+    - Gold       (earned passively — see Economy)
+
+--------------------------------------------------------------------------------
+BUILDINGS
+--------------------------------------------------------------------------------
+  - Constructed using Wood and/or Stone.
+  - Can only be placed on cleared land (no trees or rocks).
+  - Unlock the ability to recruit troops.
+  - Examples (placeholder):
+      - Barracks     : Allows recruiting infantry troops
+      - Castle/Keep  : Player's base — if destroyed, game over
+
+--------------------------------------------------------------------------------
+TROOPS
+--------------------------------------------------------------------------------
+  - Recruited by the player from buildings (costs Gold).
+  - Each troop recruited increases passive Gold income.
+  - After spawning, troops automatically walk toward the enemy's castle
+    and attack enemies in their path.
+  - Player cannot directly command individual units.
+  - Different troop types have different stats (speed, damage, health, cost).
+
+--------------------------------------------------------------------------------
+ECONOMY
+--------------------------------------------------------------------------------
+  - Gold is earned passively; income rate increases each time a troop is recruited.
+  - Gold is spent on:
+      - Recruiting additional workers
+      - Recruiting troops
+      - Upgrades (future feature)
+  - Encourages a steady cycle: earn gold → recruit troops → earn more gold.
+
+--------------------------------------------------------------------------------
+COMBAT
+--------------------------------------------------------------------------------
+  - Troops auto-march toward the enemy base and engage enemies automatically.
+  - The enemy castle has HP — reduce it to zero to win.
+  - The player's castle also has HP — defend it by producing enough troops.
+
+--------------------------------------------------------------------------------
+PLAYER ROLE
+--------------------------------------------------------------------------------
+  The player is a strategic director, not a commander. Their job is:
+    1. Direct workers to gather resources (automated after assigning)
+    2. Expand and build a productive base
+    3. Recruit workers and troops using Gold
+    4. Balance worker count vs. troop production vs. upgrades
+
+--------------------------------------------------------------------------------
+POTENTIAL FEATURES (FUTURE)
+--------------------------------------------------------------------------------
+  - Enemy AI that mirrors the player's loop (gathers, builds, recruits)
+  - Multiple troop tiers with unlock progression
+  - Tech tree / upgrades for buildings and units
+  - Multiple worker types (faster choppers, miners, etc.)
+  - Multiple maps with different terrain layouts
+  - Wave-based or continuous enemy pressure modes
+
+================================================================================

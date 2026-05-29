@@ -1,0 +1,75 @@
+================================================================================
+                          TASK LIST — PROOF OF CONCEPT
+================================================================================
+  Goal: A small, playable loop where workers gather resources automatically,
+        the player builds a barracks, recruits troops, earns gold, and tries
+        to destroy the enemy castle.
+================================================================================
+
+STAGE 1 — SCENE & MAP
+--------------------------------------------------------------------------------
+  [ ] Create a basic 2D scene with a flat play area
+  [ ] Place player castle on the left, enemy castle on the right
+  [ ] Add a few trees and rocks to the map as harvestable objects
+  [ ] Set up a simple camera (static or basic follow)
+
+STAGE 2 — WORKERS & RESOURCE GATHERING
+--------------------------------------------------------------------------------
+  [ ] Create a Worker scene that automatically moves to trees/rocks and harvests
+  [ ] Trees yield Wood when fully chopped, rocks yield Stone when fully mined
+  [ ] Player starts with 1 worker
+  [ ] Add a "Recruit Worker" button to HUD (costs Gold)
+  [ ] Workers pick the nearest available resource node and work autonomously
+  [ ] Display current resource counts (Wood / Stone / Gold) in a simple HUD
+
+STAGE 3 — BUILDING
+--------------------------------------------------------------------------------
+  [ ] Create a Barracks scene that can be placed on cleared land
+  [ ] Add a "Build Barracks" button to the HUD (costs Wood + Stone)
+  [ ] Block building on tiles that still have trees/rocks
+
+STAGE 4 — TROOPS
+--------------------------------------------------------------------------------
+  [ ] Create a basic Troop scene (simple sprite, stats: HP, speed, damage)
+  [ ] Barracks spawns a troop when the player recruits one (costs Gold)
+  [ ] Recruiting a troop increases passive Gold income
+  [ ] Troops auto-walk from player side toward the enemy castle
+  [ ] Troops deal damage to the enemy castle on contact
+
+STAGE 5 — ECONOMY
+--------------------------------------------------------------------------------
+  [ ] Passive Gold income increases each time a troop is recruited
+  [ ] Gold is spent on: recruiting workers, recruiting troops, upgrades (later)
+  [ ] Display Gold income rate in HUD (e.g. "+3 gold/sec")
+
+STAGE 6 — BASIC ENEMY
+--------------------------------------------------------------------------------
+  [ ] Enemy castle spawns basic troops at set intervals (no AI decisions yet)
+  [ ] Enemy troops auto-walk toward the player castle and deal damage
+  [ ] Both castles have visible HP bars
+
+STAGE 7 — WIN / LOSE CONDITIONS
+--------------------------------------------------------------------------------
+  [ ] Player wins when enemy castle HP reaches 0
+  [ ] Player loses when their own castle HP reaches 0
+  [ ] Show a simple win/lose screen with a restart option
+
+STAGE 8 — POLISH (POC MINIMUM)
+--------------------------------------------------------------------------------
+  [ ] Workers show a visual indicator when harvesting
+  [ ] Troops and castles show HP bars
+  [ ] HUD is readable and not overlapping game elements
+  [ ] Game is restartable without closing
+
+================================================================================
+  OUT OF SCOPE FOR POC
+  (save these for later)
+================================================================================
+  - Multiple troop types
+  - Multiple worker types
+  - Tech tree / upgrades
+  - Enemy AI that builds and gathers
+  - Multiple maps
+  - Sound and music
+  - Saving / loading
+================================================================================

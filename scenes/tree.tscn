@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cnfr0w3a3x5ex"]
+
+[ext_resource type="Texture2D" uid="uid://cjjuwjg2a3164" path="res://assets/sprites/tree.png" id="1_avsvi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_avsvi"]
+size = Vector2(16, 32)
+
+[node name="Tree" type="Node2D" unique_id=588415316]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1558485337]
+texture = ExtResource("1_avsvi")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1600811499]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=540002733]
+shape = SubResource("RectangleShape2D_avsvi")

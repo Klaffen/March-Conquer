@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://8q1p6u6wv5ag"]
+
+[ext_resource type="Script" uid="uid://cjs2iy4ntbg4w" path="res://scripts/woodhut.gd" id="1_byxdj"]
+
+[node name="Woodhut" type="Node2D" unique_id=362822991]
+script = ExtResource("1_byxdj")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=724555692]

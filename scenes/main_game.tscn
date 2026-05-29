@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://3sd07al0anuc"]
+
+[ext_resource type="PackedScene" uid="uid://c5wbaabu1dk3g" path="res://scenes/level.tscn" id="1_s3esy"]
+[ext_resource type="Script" uid="uid://bhe2om54n3ok2" path="res://scripts/timer.gd" id="2_72e8q"]
+
+[node name="MainGame" type="Node" unique_id=694198263]
+
+[node name="World" type="Node2D" parent="." unique_id=252296096]
+
+[node name="Entities" type="Node2D" parent="World" unique_id=1471971090]
+
+[node name="level" parent="World" unique_id=1803735573 instance=ExtResource("1_s3esy")]
+
+[node name="Systems" type="Node" parent="." unique_id=1896329369]
+
+[node name="Timer" type="Timer" parent="Systems" unique_id=891597061]
+autostart = true
+script = ExtResource("2_72e8q")
+
+[connection signal="timeout" from="Systems/Timer" to="Systems/Timer" method="_on_timeout"]
