@@ -1,5 +1,8 @@
 extends Node2D
+class_name Woodhut
 
+@export var ghost: bool = false
+const COST := {"wood": 10, "stone": 0}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://kgcoylj7cki4"]
+
+[ext_resource type="Script" uid="uid://vb8y2gbwm08n" path="res://scripts/castle.gd" id="1_castle"]
+[ext_resource type="Texture2D" uid="uid://b77uo41hjjxt" path="res://assets/sprites/buildings/Inn_Black.png" id="2_0ysgy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_castle"]
+size = Vector2(227, 169.875)
+
+[node name="Castle" type="Node2D" unique_id=2037842297]
+script = ExtResource("1_castle")
+
+[node name="CastleSprite" type="Sprite2D" parent="." unique_id=1821500926]
+texture = ExtResource("2_0ysgy")
+
+[node name="HPBar" type="ProgressBar" parent="." unique_id=2077855075]
+offset_left = -108.0
+offset_top = -119.0
+offset_right = 118.0
+offset_bottom = -92.0
+value = 100.0
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=583867834]
+
+[node name="HitboxShape" type="CollisionShape2D" parent="Hitbox" unique_id=1767091443]
+z_index = 1
+position = Vector2(5.5, -5.9375)
+shape = SubResource("RectangleShape2D_castle")

@@ -3,4 +3,4 @@ extends Timer
 
 
 func _on_timeout() -> void:
-	pass
+	GameManager.on_income_tick()

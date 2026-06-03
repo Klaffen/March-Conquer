@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://bewdwlqogk20t"]
+
+[ext_resource type="Script" uid="uid://dg8w1sy40mbh8" path="res://scripts/hud.gd" id="1_hud"]
+
+[node name="HUD" type="CanvasLayer" unique_id=511919954]
+script = ExtResource("1_hud")
+
+[node name="TopBar" type="HBoxContainer" parent="." unique_id=2028302941]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 400.0
+offset_bottom = 32.0
+
+[node name="WoodLabel" type="Label" parent="TopBar" unique_id=638209767]
+layout_mode = 2
+text = "Wood: 0"
+
+[node name="StoneLabel" type="Label" parent="TopBar" unique_id=650097214]
+layout_mode = 2
+text = "Stone: 0"
+
+[node name="GoldLabel" type="Label" parent="TopBar" unique_id=22693227]
+layout_mode = 2
+text = "Gold: 10"
+
+[node name="IncomeLabel" type="Label" parent="TopBar" unique_id=1146101236]
+layout_mode = 2
+text = "+1.0/s"
+
+[node name="Buttons" type="VBoxContainer" parent="." unique_id=1405091001]
+offset_left = 8.0
+offset_top = 40.0
+offset_right = 195.0
+offset_bottom = 200.0
+
+[node name="RecruitWoodsmanBtn" type="Button" parent="Buttons" unique_id=739642975]
+layout_mode = 2
+text = "Recruit woodsman (10g)"
+
+[node name="RecruitMinerBtn" type="Button" parent="Buttons" unique_id=1939494732]
+layout_mode = 2
+text = "Recruit Miner (10g)"
+
+[node name="BuildWoodhutBtn" type="Button" parent="Buttons" unique_id=824431896]
+layout_mode = 2
+text = "Build Woodhut (10w)"
+
+[node name="BuildBarracksBtn" type="Button" parent="Buttons" unique_id=206615283]
+layout_mode = 2
+text = "Build Barracks (10w 5s)"
+
+[node name="RecruitTroopBtn" type="Button" parent="Buttons" unique_id=1198100466]
+layout_mode = 2
+disabled = true
+text = "Recruit Troop (5g)"
+
+[connection signal="pressed" from="Buttons/RecruitWoodsmanBtn" to="." method="_on_recruit_worker_btn_pressed" binds= [true]]
+[connection signal="pressed" from="Buttons/RecruitMinerBtn" to="." method="_on_recruit_worker_btn_pressed" binds= [false]]
+[connection signal="pressed" from="Buttons/BuildWoodhutBtn" to="." method="_on_build_building_pressed" binds= [&"woodhut"]]
+[connection signal="pressed" from="Buttons/BuildBarracksBtn" to="." method="_on_build_building_pressed" binds= [&"barracks"]]
+[connection signal="pressed" from="Buttons/RecruitTroopBtn" to="." method="_on_recruit_troop_pressed"]

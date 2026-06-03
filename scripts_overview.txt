@@ -1,0 +1,149 @@
+================================================================================
+                         SCRIPTS OVERVIEW — MARCH & CONQUER
+================================================================================
+
+
+AUTOLOAD SINGLETON
+--------------------------------------------------------------------------------
+
+game_manager.gd
+  extends Node
+  Registered as "GameManager" autoload in project.godot — accessible from any
+  script via GameManager.
+
+  Variables:
+    wood, stone          Resource counts (int)
+    gold                 Current gold (float, ticks up every _process)
+    gold_income_rate     Gold earned per second; increases when troops are recruited
+    troop_count          How many troops the player has recruited total
+
+  Constants:
+    WORKER_COST          10g
+    BARRACKS_COST_WOOD   10w
+    BARRACKS_COST_STONE  5s
+    TROOP_COST           5g
+    GOLD_PER_TROOP       +0.5 gold/s per troop recruited
+
+  Signals:
+    resources_changed    Emitted on every gold tick and on any resource change;
+                         HUD connects to this to refresh labels.
+
+  Gold income is NOT driven by _process. Instead, on_income_tick() is called by
+  the Timer in main_game.tscn (via timer.gd) once per second. Gold added per
+  tick equals gold_income_rate (i.e. gold_income_rate == gold per second as long
+  as the Timer wait_time stays at 1.0).
+    game_over(bool)      Emitted with true = player won, false = player lost.
+
+  Key methods:
+    add_wood(n)          Add wood and emit resources_changed.
+    add_stone(n)         Add stone and emit resources_changed.
+    recruit_worker()     Deducts gold cost; returns true if affordable.
+    build_barracks()     Deducts wood+stone cost; returns true if affordable.
+    recruit_troop()      Deducts gold, increments troop_count, raises income rate.
+    end_game(bool)       Fires the game_over signal.
+
+
+RESOURCE NODES
+--------------------------------------------------------------------------------
+
+resource_node.gd
+  extends Node2D
+  Base class for all harvestable objects. Tree and Rock inherit from this.
+
+  Exports:   max_hp, yield_type ("wood"/"stone"), yield_amount
+  Variables: hp, is_depleted
+  Signal:    depleted(node)
+
+  harvest(amount=1)    Called by workers each tick. Reduces HP; when HP hits 0,
+                       calls _on_depleted() which adds the resource to GameManager
+                       and calls queue_free().
+
+  Nodes in this group are discoverable via get_tree().get_nodes_in_group("resource_nodes").
+
+tree.gd
+  extends resource_node.gd
+  Sets yield_type = "wood" and yield_amount = 5 before calling super._ready().
+  Attach to tree.tscn (already done).
+
+rock.gd
+  extends resource_node.gd
+  Sets yield_type = "stone" and yield_amount = 5 before calling super._ready().
+  Attach to rock.tscn.
+
+
+BUILDINGS & STRUCTURES
+--------------------------------------------------------------------------------
+
+castle.gd
+  extends Node2D
+  Attach to castle.tscn. Used for both the player and enemy castle — set the
+  "is_player_castle" export to distinguish them.
+
+  Exports:   max_hp (default 100), is_player_castle (default true)
+  Nodes:     requires a ProgressBar child named "HPBar"
+  Groups:    adds self to "player_castle" or "enemy_castle" on ready
+
+  take_damage(amount)  Reduces HP, updates the HP bar, and calls
+                       GameManager.end_game() when HP reaches 0.
+
+barracks.gd
+  extends Node2D
+  Spawns troops when spawn_troop() is called. Expects a PackedScene set on the
+  "troop_scene" export in the editor.
+
+  spawn_troop()   Instantiates troop_scene at the barracks position and adds it
+                  to MainGame/World/Entities.
+
+
+UNITS
+--------------------------------------------------------------------------------
+
+worker.gd
+  extends CharacterBody2D
+  Fully autonomous. On ready it finds the nearest undepleted resource node and
+  walks toward it. When within HARVEST_RANGE it calls harvest() every
+  HARVEST_INTERVAL seconds. After a node depletes it automatically re-targets.
+
+  Constants: SPEED 60, HARVEST_RANGE 20px, HARVEST_INTERVAL 1s
+
+troop.gd
+  extends CharacterBody2D
+  Fully autonomous. Walks toward the nearest enemy troop; if none exist, walks
+  toward the enemy castle. Attacks with take_damage() when within ATTACK_RANGE.
+
+  Export:    max_hp (default 30), is_player_troop (default true)
+  Groups:    adds self to "player_troops" or "enemy_troops" on ready
+  Constants: SPEED 40, DAMAGE 10, ATTACK_RANGE 20px, ATTACK_INTERVAL 1s
+
+  take_damage(amount)  Reduces HP; calls queue_free() on death.
+
+
+UI
+--------------------------------------------------------------------------------
+
+hud.gd
+  extends CanvasLayer
+  Connects to GameManager.resources_changed on ready and refreshes all labels.
+  Requires the following node paths:
+    TopBar/WoodLabel, TopBar/StoneLabel, TopBar/GoldLabel, TopBar/IncomeLabel
+
+  Button callbacks (wire up in editor or hud.tscn):
+    _on_recruit_worker_pressed   Calls GameManager.recruit_worker(); on success
+                                 calls MainGame.spawn_worker()
+    _on_build_barracks_pressed   Calls GameManager.build_barracks(); on success
+                                 calls MainGame.spawn_barracks()
+    _on_recruit_troop_pressed    Calls GameManager.recruit_troop(); on success
+                                 calls MainGame.spawn_troop()
+
+  NOTE: MainGame needs spawn_worker(), spawn_barracks(), and spawn_troop()
+        methods added to main_game.gd (not yet implemented).
+
+game_over.gd
+  extends CanvasLayer
+  Hidden on ready. Connects to GameManager.game_over and shows itself with a
+  "Victory!" or "Defeated!" message when triggered.
+  Requires node paths: Panel/VBox/ResultLabel, Panel/VBox/RestartButton
+
+  _on_restart_pressed   Resets all GameManager state and reloads the scene.
+
+================================================================================

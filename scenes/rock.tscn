@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://r3cche0he1iv"]
+
+[ext_resource type="Script" uid="uid://d2tg4vla3f151" path="res://scripts/rock.gd" id="1_rock"]
+[ext_resource type="Texture2D" uid="uid://utrk5c3bg1d3" path="res://assets/sprites/copper.png" id="2_mek2u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rock"]
+size = Vector2(16, 16)
+
+[node name="Rock" type="Node2D" unique_id=1813826142]
+script = ExtResource("1_rock")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=205220886]
+texture = ExtResource("2_mek2u")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=325813844]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=742248756]
+shape = SubResource("RectangleShape2D_rock")

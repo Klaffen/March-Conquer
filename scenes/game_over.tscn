@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dxun53yof3wao"]
+
+[ext_resource type="Script" path="res://scripts/game_over.gd" id="1_game_over"]
+
+[node name="GameOver" type="CanvasLayer"]
+script = ExtResource("1_game_over")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 260.0
+offset_top = 180.0
+offset_right = 540.0
+offset_bottom = 300.0
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 264.0
+offset_bottom = 104.0
+
+[node name="ResultLabel" type="Label" parent="Panel/VBox"]
+text = "Victory!"
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="Panel/VBox"]
+text = "Play Again"

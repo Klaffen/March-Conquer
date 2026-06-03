@@ -1,0 +1,64 @@
+extends Node
+
+var wood: int = 0
+var stone: int = 0
+var gold: float = 10.0
+var gold_income_rate: float = 1.0
+var troop_count: int = 0
+
+enum WorkerTypes {WOODSMAN, MINER}
+
+const WORKER_COST: int = 10
+const TROOP_COST: int = 5
+const GOLD_PER_TROOP: float = 0.5
+const MODULATION_INVALID = Color("ff000078")
+const MODULATION_VALID = Color("00f70078")
+
+
+signal resources_changed
+signal game_over(player_won: bool)
+
+func on_income_tick() -> void:
+	gold += gold_income_rate
+	resources_changed.emit()
+
+func add_wood(amount: int) -> void:
+	wood += amount
+	resources_changed.emit()
+
+func add_stone(amount: int) -> void:
+	stone += amount
+	resources_changed.emit()
+
+func can_pay(cost) -> bool:
+	return wood >= cost.wood and stone >= cost.stone
+
+func recruit_worker() -> bool:
+	if gold >= WORKER_COST:
+		gold -= WORKER_COST
+		resources_changed.emit()
+		return true
+	return false
+
+func try_pay(cost: Dictionary) -> bool:
+
+	if not can_pay(cost):
+		return false
+
+	wood -= cost.wood
+	stone -= cost.stone
+	resources_changed.emit()
+
+	return true
+
+func recruit_troop() -> bool:
+	if gold >= TROOP_COST:
+		gold -= TROOP_COST
+		troop_count += 1
+		gold_income_rate += GOLD_PER_TROOP
+		resources_changed.emit()
+		return true
+	return false
+
+func end_game(player_won: bool) -> void:
+	game_over.emit(player_won)

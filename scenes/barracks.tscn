@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dsf8mt3gjanv4"]
+
+[ext_resource type="Script" uid="uid://ueklf6w0638l" path="res://scripts/barracks.gd" id="1_barracks"]
+[ext_resource type="Texture2D" uid="uid://v4hg2kyk3efk" path="res://assets/sprites/buildings/Church_Black.png" id="2_lery3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lery3"]
+size = Vector2(90, 100)
+
+[node name="Barracks" type="Node2D" unique_id=1397127250]
+z_index = 1
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_barracks")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1918388738]
+texture = ExtResource("2_lery3")
+region_enabled = true
+region_rect = Rect2(0, 0, 114.846436, 144)
+
+[node name="Door" type="Node2D" parent="." unique_id=2006624183]
+position = Vector2(-2, 54)
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1588180828]
+
+[node name="HitboxShape" type="CollisionShape2D" parent="Hitbox" unique_id=465334564]
+position = Vector2(-1, 12)
+shape = SubResource("RectangleShape2D_lery3")

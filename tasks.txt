@@ -8,25 +8,25 @@
 
 STAGE 1 — SCENE & MAP
 --------------------------------------------------------------------------------
-  [ ] Create a basic 2D scene with a flat play area
-  [ ] Place player castle on the left, enemy castle on the right
-  [ ] Add a few trees and rocks to the map as harvestable objects
-  [ ] Set up a simple camera (static or basic follow)
+  [X] Create a basic 2D scene with a flat play area
+  [X] Place player castle on the left, enemy castle on the right
+  [X] Add a few trees and rocks to the map as harvestable objects
+  [X] Set up a simple camera (static or basic follow)
 
 STAGE 2 — WORKERS & RESOURCE GATHERING
 --------------------------------------------------------------------------------
-  [ ] Create a Worker scene that automatically moves to trees/rocks and harvests
-  [ ] Trees yield Wood when fully chopped, rocks yield Stone when fully mined
-  [ ] Player starts with 1 worker
-  [ ] Add a "Recruit Worker" button to HUD (costs Gold)
-  [ ] Workers pick the nearest available resource node and work autonomously
-  [ ] Display current resource counts (Wood / Stone / Gold) in a simple HUD
+  [X] Create a Worker scene that automatically moves to trees/rocks and harvests
+  [X] Trees yield Wood when fully chopped, rocks yield Stone when fully mined
+  [X] Player starts with 1 worker
+  [X] Add a "Recruit Worker" button to HUD (costs Gold)
+  [X] Workers pick the nearest available resource node and work autonomously
+  [X] Display current resource counts (Wood / Stone / Gold) in a simple HUD
 
 STAGE 3 — BUILDING
 --------------------------------------------------------------------------------
-  [ ] Create a Barracks scene that can be placed on cleared land
-  [ ] Add a "Build Barracks" button to the HUD (costs Wood + Stone)
-  [ ] Block building on tiles that still have trees/rocks
+  [x] Create a Barracks scene that can be placed on cleared land
+  [x] Add a "Build Barracks" button to the HUD (costs Wood + Stone)
+  [X] Block building on tiles that still have trees/rocks
 
 STAGE 4 — TROOPS
 --------------------------------------------------------------------------------
