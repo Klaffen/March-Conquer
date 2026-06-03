@@ -2,6 +2,9 @@
 .godot/
 /android/
 
+# Godot scene-save temp files (e.g. foo.tscn1234567890.tmp)
+*.tscn*.tmp
+
 # Export presets (contains personal paths, not project config)
 export_presets.cfg
 
