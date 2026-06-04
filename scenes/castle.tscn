@@ -13,6 +13,7 @@ script = ExtResource("1_castle")
 texture = ExtResource("2_0ysgy")
 
 [node name="HPBar" type="ProgressBar" parent="." unique_id=2077855075]
+z_index = 2
 offset_left = -108.0
 offset_top = -119.0
 offset_right = 118.0

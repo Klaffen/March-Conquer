@@ -1,15 +1,15 @@
 extends Node2D
 class_name Barracks
 
-@export var troop_scene: PackedScene
+@export var troop_scene: PackedScene = load("res://scenes/troop.tscn")
 @export var ghost: bool = false
 
-const COST := {"wood": 10, "stone": 5}
+const COST: Dictionary = {"wood": 10, "stone": 5}
 
 enum State { IDLE, JUST_PRODUCED_IDLE, PRODUCING, JUST_PRODUCED_PRODUCING }
 
-const REGION_W := 114.846436
-const REGION_H := 144.0
+const REGION_W: float = 114.846436
+const REGION_H: float = 144.0
 const REGIONS: Array[Rect2] = [
 	Rect2(REGION_W * 0, 0, REGION_W, REGION_H),  # just produced, now idle
 	Rect2(REGION_W * 1, 0, REGION_W, REGION_H),  # idle
@@ -17,7 +17,7 @@ const REGIONS: Array[Rect2] = [
 	Rect2(REGION_W * 3, 0, REGION_W, REGION_H),  # still producing
 ]
 
-const JUST_PRODUCED_DURATION := 1.0
+const JUST_PRODUCED_DURATION: float = 1.0
 
 @onready var sprite: Sprite2D = $Sprite2D
 
@@ -36,8 +36,9 @@ func _process(delta: float) -> void:
 func spawn_troop() -> void:
 	if troop_scene == null:
 		return
-	var troop = troop_scene.instantiate()
-	troop.global_position = global_position
+	var troop: Troop = troop_scene.instantiate()
+	var door: Node2D = get_node_or_null("Door")
+	troop.global_position = door.global_position if door != null else global_position
 	get_tree().root.get_node("MainGame/World/Entities").add_child(troop)
 	_just_produced_timer = JUST_PRODUCED_DURATION
 	_set_state(State.JUST_PRODUCED_PRODUCING if is_producing else State.JUST_PRODUCED_IDLE)

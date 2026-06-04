@@ -3,13 +3,13 @@
 ================================================================================
   Goal: A small, playable loop where workers gather resources automatically,
         the player builds a barracks, recruits troops, earns gold, and tries
-        to destroy the enemy castle.
+        to destroy the enemy portal.
 ================================================================================
 
 STAGE 1 — SCENE & MAP
 --------------------------------------------------------------------------------
   [X] Create a basic 2D scene with a flat play area
-  [X] Place player castle on the left, enemy castle on the right
+  [X] Place player castle on the left, enemy portal on the right
   [X] Add a few trees and rocks to the map as harvestable objects
   [X] Set up a simple camera (static or basic follow)
 
@@ -30,36 +30,36 @@ STAGE 3 — BUILDING
 
 STAGE 4 — TROOPS
 --------------------------------------------------------------------------------
-  [ ] Create a basic Troop scene (simple sprite, stats: HP, speed, damage)
-  [ ] Barracks spawns a troop when the player recruits one (costs Gold)
-  [ ] Recruiting a troop increases passive Gold income
-  [ ] Troops auto-walk from player side toward the enemy castle
-  [ ] Troops deal damage to the enemy castle on contact
+  [X] Create a basic Troop scene (simple sprite, stats: HP, speed, damage)
+  [X] Barracks spawns a troop when the player recruits one (costs Gold)
+  [X] Recruiting a troop increases passive Gold income
+  [X] Troops auto-walk from player side toward the enemy portal
+  [X] Troops deal damage to the enemy portal on contact
 
 STAGE 5 — ECONOMY
 --------------------------------------------------------------------------------
-  [ ] Passive Gold income increases each time a troop is recruited
-  [ ] Gold is spent on: recruiting workers, recruiting troops, upgrades (later)
-  [ ] Display Gold income rate in HUD (e.g. "+3 gold/sec")
+  [X] Passive Gold income increases each time a troop is recruited
+  [X] Gold is spent on: recruiting workers, recruiting troops, upgrades (later)
+  [X] Display Gold income rate in HUD (e.g. "+3 gold/sec")
 
-STAGE 6 — BASIC ENEMY
+STAGE 6 — ENEMY PORTAL
 --------------------------------------------------------------------------------
-  [ ] Enemy castle spawns basic troops at set intervals (no AI decisions yet)
-  [ ] Enemy troops auto-walk toward the player castle and deal damage
-  [ ] Both castles have visible HP bars
+  [X] Enemy portal spawns basic troops at set intervals until it is destroyed
+  [X] Enemy troops auto-walk toward the player castle and deal damage
+  [X] Player castle and enemy portal both have visible HP bars
 
 STAGE 7 — WIN / LOSE CONDITIONS
 --------------------------------------------------------------------------------
-  [ ] Player wins when enemy castle HP reaches 0
-  [ ] Player loses when their own castle HP reaches 0
-  [ ] Show a simple win/lose screen with a restart option
+  [X] Player wins when enemy portal HP reaches 0
+  [X] Player loses when their own castle HP reaches 0
+  [X] Show a simple win/lose screen with a restart option
 
 STAGE 8 — POLISH (POC MINIMUM)
 --------------------------------------------------------------------------------
-  [ ] Workers show a visual indicator when harvesting
-  [ ] Troops and castles show HP bars
-  [ ] HUD is readable and not overlapping game elements
-  [ ] Game is restartable without closing
+  [X] Workers show a visual indicator when harvesting
+  [X] Troops, player castle, and enemy portal show HP bars
+  [X] HUD is readable and not overlapping game elements
+  [X] Game is restartable without closing
 
 ================================================================================
   OUT OF SCOPE FOR POC

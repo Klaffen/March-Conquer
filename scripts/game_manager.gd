@@ -1,22 +1,32 @@
 extends Node
 
-var wood: int = 0
-var stone: int = 0
-var gold: float = 10.0
-var gold_income_rate: float = 1.0
-var troop_count: int = 0
+var wood: int
+var stone: int
+var gold: float
+var gold_income_rate: float
+var troop_count: int
 
 enum WorkerTypes {WOODSMAN, MINER}
 
 const WORKER_COST: int = 10
 const TROOP_COST: int = 5
 const GOLD_PER_TROOP: float = 0.5
-const MODULATION_INVALID = Color("ff000078")
-const MODULATION_VALID = Color("00f70078")
+const MODULATION_INVALID: Color = Color("ff000078")
+const MODULATION_VALID: Color = Color("00f70078")
 
 
 signal resources_changed
 signal game_over(player_won: bool)
+
+func _ready() -> void:
+	reset_values()
+
+func reset_values() -> void:
+	wood = 10
+	stone = 10
+	gold = 10.0
+	gold_income_rate = 1.0
+	troop_count = 0
 
 func on_income_tick() -> void:
 	gold += gold_income_rate
@@ -30,7 +40,7 @@ func add_stone(amount: int) -> void:
 	stone += amount
 	resources_changed.emit()
 
-func can_pay(cost) -> bool:
+func can_pay(cost: Dictionary) -> bool:
 	return wood >= cost.wood and stone >= cost.stone
 
 func recruit_worker() -> bool:
@@ -41,7 +51,6 @@ func recruit_worker() -> bool:
 	return false
 
 func try_pay(cost: Dictionary) -> bool:
-
 	if not can_pay(cost):
 		return false
 

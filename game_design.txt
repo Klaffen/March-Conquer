@@ -11,10 +11,13 @@ CORE CONCEPT
 --------------------------------------------------------------------------------
   A resource-gathering RTS where the player recruits workers to harvest the
   environment, constructs buildings, and trains troops that automatically march
-  toward the enemy's castle. The player cannot directly control units — victory
+  toward the enemy's portal. The player cannot directly control units — victory
   comes from smart base management, not micromanagement.
 
-  Objective: Destroy the enemy's castle.
+  The enemy is intentionally simple: it has no economy and does not build. It is
+  a single portal that continuously spawns troops until it is destroyed.
+
+  Objective: Destroy the enemy's portal.
 
 --------------------------------------------------------------------------------
 RESOURCE GATHERING
@@ -44,7 +47,7 @@ TROOPS
 --------------------------------------------------------------------------------
   - Recruited by the player from buildings (costs Gold).
   - Each troop recruited increases passive Gold income.
-  - After spawning, troops automatically walk toward the enemy's castle
+  - After spawning, troops automatically walk toward the enemy's portal
     and attack enemies in their path.
   - Player cannot directly command individual units.
   - Different troop types have different stats (speed, damage, health, cost).
@@ -60,10 +63,19 @@ ECONOMY
   - Encourages a steady cycle: earn gold → recruit troops → earn more gold.
 
 --------------------------------------------------------------------------------
+ENEMY (PORTAL)
+--------------------------------------------------------------------------------
+  - The enemy is a single portal — it has no workers, economy, or buildings.
+  - The portal spawns troops at set intervals and keeps spawning until destroyed.
+  - Spawned enemy troops auto-march toward the player's castle and attack along
+    the way, same as player troops.
+  - The portal has HP; destroying it wins the game.
+
+--------------------------------------------------------------------------------
 COMBAT
 --------------------------------------------------------------------------------
-  - Troops auto-march toward the enemy base and engage enemies automatically.
-  - The enemy castle has HP — reduce it to zero to win.
+  - Troops auto-march toward the enemy portal and engage enemies automatically.
+  - The enemy portal has HP — reduce it to zero to win.
   - The player's castle also has HP — defend it by producing enough troops.
 
 --------------------------------------------------------------------------------

@@ -27,6 +27,13 @@ text = "Gold: 10"
 layout_mode = 2
 text = "+1.0/s"
 
+[node name="RestartBtn" type="Button" parent="." unique_id=1783598114]
+offset_left = 1079.0
+offset_top = 10.0
+offset_right = 1273.0
+offset_bottom = 41.0
+text = "Restart the game"
+
 [node name="Buttons" type="VBoxContainer" parent="." unique_id=1405091001]
 offset_left = 8.0
 offset_top = 40.0
@@ -54,6 +61,7 @@ layout_mode = 2
 disabled = true
 text = "Recruit Troop (5g)"
 
+[connection signal="pressed" from="RestartBtn" to="." method="_on_restart_btn_pressed"]
 [connection signal="pressed" from="Buttons/RecruitWoodsmanBtn" to="." method="_on_recruit_worker_btn_pressed" binds= [true]]
 [connection signal="pressed" from="Buttons/RecruitMinerBtn" to="." method="_on_recruit_worker_btn_pressed" binds= [false]]
 [connection signal="pressed" from="Buttons/BuildWoodhutBtn" to="." method="_on_build_building_pressed" binds= [&"woodhut"]]

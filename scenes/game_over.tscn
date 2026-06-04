@@ -1,25 +1,30 @@
-[gd_scene format=3 uid="uid://dxun53yof3wao"]
+[gd_scene format=3 uid="uid://btd0t63shrwcu"]
 
-[ext_resource type="Script" path="res://scripts/game_over.gd" id="1_game_over"]
+[ext_resource type="Script" uid="uid://c01lfrus66550" path="res://scripts/game_over.gd" id="1_game_over"]
 
-[node name="GameOver" type="CanvasLayer"]
+[node name="GameOver" type="CanvasLayer" unique_id=1736609441]
 script = ExtResource("1_game_over")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=657041414]
 offset_left = 260.0
 offset_top = 180.0
 offset_right = 540.0
 offset_bottom = 300.0
 
-[node name="VBox" type="VBoxContainer" parent="Panel"]
+[node name="VBox" type="VBoxContainer" parent="Panel" unique_id=756367618]
+layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 264.0
 offset_bottom = 104.0
 
-[node name="ResultLabel" type="Label" parent="Panel/VBox"]
+[node name="ResultLabel" type="Label" parent="Panel/VBox" unique_id=306183338]
+layout_mode = 2
 text = "Victory!"
 horizontal_alignment = 1
 
-[node name="RestartButton" type="Button" parent="Panel/VBox"]
+[node name="RestartButton" type="Button" parent="Panel/VBox" unique_id=302699157]
+layout_mode = 2
 text = "Play Again"
+
+[connection signal="pressed" from="Panel/VBox/RestartButton" to="." method="_on_restart_button_pressed"]

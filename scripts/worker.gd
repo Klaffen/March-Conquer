@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 			_play_animation("idle_front", false)
 		return
 
-	var direction = target_node.global_position - global_position
+	var direction: Vector2 = target_node.global_position - global_position
 	if direction.length() <= HARVEST_RANGE:
 		is_harvesting = true
 		harvest_timer += delta
@@ -58,11 +58,11 @@ func _play_animation(anim_name: StringName, flip: bool) -> void:
 func _find_nearest_resource() -> void:
 	var nodes: Array = get_tree().get_nodes_in_group("wood") if worker_type == GameManager.WorkerTypes.WOODSMAN else get_tree().get_nodes_in_group("stone")
 	target_node = null
-	var min_dist := INF
+	var min_dist: float = INF
 	for node in nodes:
 		if node.is_depleted:
 			continue
-		var dist = global_position.distance_to(node.global_position)
+		var dist: float = global_position.distance_to(node.global_position)
 		if dist < min_dist:
 			min_dist = dist
 			target_node = node

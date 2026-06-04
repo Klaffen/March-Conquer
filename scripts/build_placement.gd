@@ -1,7 +1,7 @@
 extends Node2D
 class_name BuildPlacement
 
-@onready var entities: Node2D = $"../World/Entities"
+@onready var buildings: Node2D = $"../World/Buildings"
 @export var obstacle_mask: int = 1
 
 var _active: bool = false
@@ -26,21 +26,25 @@ func begin_placement(building_scene: PackedScene, cost: Dictionary, is_player: b
 
 	_ghost = _building_scene.instantiate()
 	_ghost.set("ghost", true)
+	_ghost.name = "Ghost"
 
 	var collision_shape: CollisionShape2D = _ghost.get_node("Hitbox/HitboxShape")
 	collision_shape.disabled = true
 
-	entities.add_child(_ghost)
+	buildings.add_child(_ghost)
 
 func cancel_placement() -> void:
-	_ghost.queue_free()
+	_reset_state()
+	placement_cancelled.emit()
+
+func _reset_state() -> void:
+	if _ghost != null:
+		_ghost.queue_free()
 
 	_active = false
 	_ghost = null
 	_building_scene = null
 	_is_valid = false
-
-	placement_cancelled.emit()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -69,7 +73,7 @@ func is_footprint_clear(collision_shape: CollisionShape2D) -> bool:
 	physics_shape.transform = collision_shape.global_transform
 	physics_shape.collide_with_areas = true
 
-	var hits := get_world_2d().direct_space_state.intersect_shape(physics_shape, 32)
+	var hits: Array[Dictionary] = get_world_2d().direct_space_state.intersect_shape(physics_shape, 32)
 	for hit in hits:
 		if not _ghost.is_ancestor_of(hit.collider):
 			return false
@@ -89,10 +93,10 @@ func _try_commit() -> void:
 func _spawn_real(world_pos: Vector2) -> void:
 	var building: Node2D = _building_scene.instantiate()
 	building.global_position = world_pos
-	entities.add_child(building)
+	buildings.add_child(building)
 
 	placement_committed.emit(building)
-	cancel_placement()
+	_reset_state()
 
 func _tint_ghost(valid: bool) -> void:
 	_ghost.modulate = GameManager.MODULATION_VALID if valid else GameManager.MODULATION_INVALID

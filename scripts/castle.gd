@@ -6,7 +6,7 @@ extends Node2D
 var hp: int
 
 @onready var hp_bar: ProgressBar = $HPBar
-@onready var caslte_sprite: Sprite2D = $CastleSprite
+@onready var castle_sprite: Sprite2D = $CastleSprite
 
 signal castle_destroyed
 
@@ -17,7 +17,7 @@ func _ready() -> void:
 	if is_player_castle:
 		add_to_group("player_castle")
 	else:
-		caslte_sprite.texture = load("res://assets/sprites/buildings/Inn_Red.png")
+		castle_sprite.texture = load("res://assets/sprites/buildings/Inn_Red.png")
 		add_to_group("enemy_castle")
 
 func take_damage(amount: int) -> void:
@@ -25,4 +25,4 @@ func take_damage(amount: int) -> void:
 	hp_bar.value = hp
 	if hp <= 0:
 		castle_destroyed.emit()
-		GameManager.end_game(not is_player_castle)
+		GameManager.end_game(false)
