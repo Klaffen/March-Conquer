@@ -6,6 +6,8 @@ var gold: float
 var gold_income_rate: float
 var troop_count: int
 
+var selected_building: Node
+
 enum WorkerTypes {WOODSMAN, MINER}
 
 const WORKER_COST: int = 10
@@ -17,6 +19,7 @@ const MODULATION_VALID: Color = Color("00f70078")
 
 signal resources_changed
 signal game_over(player_won: bool)
+signal selection_changed
 
 func _ready() -> void:
 	reset_values()
@@ -27,6 +30,7 @@ func reset_values() -> void:
 	gold = 10.0
 	gold_income_rate = 1.0
 	troop_count = 0
+	selected_building = null
 
 func on_income_tick() -> void:
 	gold += gold_income_rate
@@ -60,6 +64,7 @@ func try_pay(cost: Dictionary) -> bool:
 
 	return true
 
+
 func recruit_troop() -> bool:
 	if gold >= TROOP_COST:
 		gold -= TROOP_COST
@@ -70,3 +75,17 @@ func recruit_troop() -> bool:
 
 func end_game(player_won: bool) -> void:
 	game_over.emit(player_won)
+
+func select_building(building: Node) -> void:
+	if selected_building == building:
+		return
+
+	if is_instance_valid(selected_building):
+		selected_building.set_selected(false)
+
+	selected_building = building
+
+	if building:
+		building.set_selected(true)
+
+	selection_changed.emit()

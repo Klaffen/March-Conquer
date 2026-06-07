@@ -2,7 +2,10 @@
 
 [ext_resource type="Script" uid="uid://cjs2iy4ntbg4w" path="res://scenes/buildings/woodhut.gd" id="1_byxdj"]
 [ext_resource type="Texture2D" uid="uid://c8cfbibppl8yr" path="res://assets/sprites/buildings/Shed_Base_Black.png" id="2_2mxdf"]
+[ext_resource type="Shader" uid="uid://d4gxfbd0nvlvn" path="res://shaders/outline.gdshader" id="2_40yeb"]
 [ext_resource type="PackedScene" uid="uid://dln3hhd6mkscf" path="res://scenes/buildings/build_queue.tscn" id="3_mrg83"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_40yeb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2mxdf"]
 size = Vector2(63, 75)
@@ -11,12 +14,13 @@ size = Vector2(63, 75)
 z_index = 1
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_byxdj")
+outline = ExtResource("2_40yeb")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=724555692]
+material = SubResource("ShaderMaterial_40yeb")
 texture = ExtResource("2_2mxdf")
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=1495347118]
-visible = false
 
 [node name="HitboxShape" type="CollisionShape2D" parent="Hitbox" unique_id=662940791]
 position = Vector2(-0.5, 5.5)

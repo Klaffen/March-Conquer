@@ -1,4 +1,4 @@
-extends Node2D
+extends Building
 class_name Barracks
 
 @export var troop_scene: PackedScene = load("res://scenes/units/troop.tscn")
@@ -24,14 +24,8 @@ const JUST_PRODUCED_DURATION: float = 1.0
 
 const income: float = 0.25
 
-@onready var sprite: Sprite2D = $Sprite2D
-@onready var build_queue: Node = $BuildQueue
-
 var state: State = State.IDLE
 var _just_produced_timer: float = 0.0
-
-func _ready() -> void:
-	build_queue.finished_item.connect(_spawn_unit)
 
 func _process(delta: float) -> void:
 	if ghost:
@@ -45,7 +39,7 @@ func _process(delta: float) -> void:
 
 # Queues a unit for production. Omit the arguments to build the default troop;
 # pass a scene/icon/time to produce any other unit type.
-func add_to_queue(unit_scene: PackedScene = null, icon: Texture2D = null, time: float = 10.0) -> void:
+func add_to_queue(unit_scene: PackedScene = null, icon: Texture2D = null, time: float = 5.0) -> void:
 	if unit_scene == null:
 		unit_scene = troop_scene
 	if icon == null:
@@ -60,18 +54,9 @@ func add_to_queue(unit_scene: PackedScene = null, icon: Texture2D = null, time: 
 
 	_update_state()
 
-
-func _spawn_unit(unit_scene: PackedScene) -> void:
-	if unit_scene == null:
-		return
-
-	var unit: Node2D = unit_scene.instantiate()
-	var door: Node2D = get_node_or_null("Door")
-	unit.global_position = door.global_position if door != null else global_position
-	get_tree().root.get_node("MainGame/World/Entities").add_child(unit)
+func _on_unit_spawned(_unit: Node2D) -> void:
 	_just_produced_timer = JUST_PRODUCED_DURATION
 	_update_state()
-
 	GameManager.gold_income_rate += income
 
 # The state is fully derived from two facts: whether the queue still has work,
@@ -91,7 +76,7 @@ func _update_state() -> void:
 
 	state = new_state
 	match state:
-		State.JUST_PRODUCED_IDLE:       sprite.region_rect = REGIONS[0]
-		State.IDLE:                     sprite.region_rect = REGIONS[1]
-		State.JUST_PRODUCED_PRODUCING:  sprite.region_rect = REGIONS[2]
-		State.PRODUCING:                sprite.region_rect = REGIONS[3]
+		State.JUST_PRODUCED_IDLE:       sprite_2d.region_rect = REGIONS[0]
+		State.IDLE:                     sprite_2d.region_rect = REGIONS[1]
+		State.JUST_PRODUCED_PRODUCING:  sprite_2d.region_rect = REGIONS[2]
+		State.PRODUCING:                sprite_2d.region_rect = REGIONS[3]

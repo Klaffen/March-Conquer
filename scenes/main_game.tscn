@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bewdwlqogk20t" path="res://scenes/ui/hud.tscn" id="3_d2op2"]
 [ext_resource type="PackedScene" uid="uid://b0ahy3jwb1gtf" path="res://scenes/units/woodsman.tscn" id="3_ipu61"]
 [ext_resource type="Script" uid="uid://cadwmjbowvwv3" path="res://scenes/buildings/build_placement.gd" id="7_wi4c7"]
+[ext_resource type="Script" uid="uid://35rk3teamqv5" path="res://scenes/ui/selector.gd" id="8_sel"]
 
 [node name="MainGame" type="Node" unique_id=694198263 node_paths=PackedStringArray("entities")]
 script = ExtResource("1_ygxny")
@@ -40,3 +41,6 @@ script = ExtResource("7_wi4c7")
 [node name="Timer" type="Timer" parent="." unique_id=921066949]
 autostart = true
 script = ExtResource("2_72e8q")
+
+[node name="Selector" type="Node" parent="." unique_id=555000123]
+script = ExtResource("8_sel")

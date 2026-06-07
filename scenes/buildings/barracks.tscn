@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://v4hg2kyk3efk" path="res://assets/sprites/buildings/Church_Black.png" id="2_mm6or"]
 [ext_resource type="PackedScene" uid="uid://dln3hhd6mkscf" path="res://scenes/buildings/build_queue.tscn" id="3_mm6or"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lc585"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lery3"]
 size = Vector2(90, 100)
 
@@ -15,6 +17,7 @@ script = ExtResource("1_i88yw")
 knight_icon = ExtResource("2_lc585")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1918388738]
+material = SubResource("ShaderMaterial_lc585")
 texture = ExtResource("2_mm6or")
 region_enabled = true
 region_rect = Rect2(0, 0, 114.846436, 144)

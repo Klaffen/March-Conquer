@@ -10,6 +10,9 @@ signal finished_item(unit_scene: PackedScene)
 func is_empty() -> bool:
 	return queue.get_child_count() == 0
 
+func is_full() -> bool:
+	return queue.get_child_count() >= max_size
+
 func size() -> int:
 	return queue.get_child_count()
 

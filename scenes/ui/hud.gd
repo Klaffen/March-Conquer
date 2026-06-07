@@ -19,9 +19,8 @@ extends CanvasLayer
 
 func _ready() -> void:
 	GameManager.resources_changed.connect(_update_display)
-
-	_on_resource_change()
-	GameManager.resources_changed.connect(_on_resource_change)
+	GameManager.resources_changed.connect(_refresh_buttons)
+	GameManager.selection_changed.connect(_refresh_buttons)
 
 	recruit_woodsman_button.pressed.connect(_on_recruit_worker_btn_pressed.bind(true))
 	recruit_miner_button.pressed.connect(_on_recruit_worker_btn_pressed.bind(false))
@@ -31,6 +30,7 @@ func _ready() -> void:
 	restart_button.pressed.connect(_on_restart_btn_pressed)
 
 	_update_display()
+	_refresh_buttons()
 
 
 func _update_display() -> void:
@@ -39,10 +39,18 @@ func _update_display() -> void:
 	gold_label.text = "Gold: %d" % int(GameManager.gold)
 	income_label.text = "+%.1f/s" % GameManager.gold_income_rate
 
-func _on_resource_change() -> void:
-	recruit_woodsman_button.disabled = GameManager.gold < GameManager.WORKER_COST
-	recruit_miner_button.disabled = GameManager.gold < GameManager.WORKER_COST
-	recruit_troop_button.disabled = GameManager.gold < GameManager.TROOP_COST
+# Recruit buttons are only usable when the matching building is selected and the
+# player can afford the unit.
+func _refresh_buttons() -> void:
+	var selected: Node = GameManager.selected_building
+	if not is_instance_valid(selected):
+		selected = null
+	var barracks_selected: bool = selected is Barracks
+	var woodhut_selected: bool = selected is Woodhut
+
+	recruit_troop_button.disabled = not barracks_selected or GameManager.gold < GameManager.TROOP_COST
+	recruit_woodsman_button.disabled = not woodhut_selected or GameManager.gold < GameManager.WORKER_COST
+	recruit_miner_button.disabled = not woodhut_selected or GameManager.gold < GameManager.WORKER_COST
 	build_barracks_button.disabled = not GameManager.can_pay(Barracks.COST)
 	build_woodhut_button.disabled = not GameManager.can_pay(Woodhut.COST)
 
@@ -56,19 +64,20 @@ func _on_build_building_pressed(building: String) -> void:
 	build_placement.begin_placement(scene, cost, true)
 
 func _on_recruit_troop_pressed() -> void:
-	var main: Node = get_tree().root.get_node("MainGame")
-	# Only charge gold if there's actually a barracks to spawn from, then spawn
-	# only once payment succeeds — so the player can never get a free troop.
-	if not main.can_spawn_troop(true):
+	var barracks: Barracks = GameManager.selected_building as Barracks
+	if barracks == null or not barracks.can_queue():
 		return
+	# Charge only after confirming there's room to queue, so a troop is never free.
 	if GameManager.recruit_troop():
-		main.spawn_troop(true)
+		barracks.add_to_queue()
 
 
 func _on_recruit_worker_btn_pressed(is_woodsman: bool) -> void:
+	var woodhut: Woodhut = GameManager.selected_building as Woodhut
+	if woodhut == null or not woodhut.can_queue():
+		return
 	if GameManager.recruit_worker():
-		get_tree().root.get_node("MainGame").spawn_worker(true, is_woodsman)
-
+		woodhut.add_to_queue(is_woodsman)
 
 func _on_restart_btn_pressed() -> void:
 	get_tree().paused = false
