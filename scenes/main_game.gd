@@ -2,17 +2,22 @@ extends Node
 
 @export var entities: Node2D
 
-var woodsman_scene: PackedScene = load("res://scenes/woodsman.tscn")
-var miner_scene: PackedScene = load("res://scenes/miner.tscn")
-var troop_scene: PackedScene = load("res://scenes/troop.tscn")
+var woodsman_scene: PackedScene = load("res://scenes/units/woodsman.tscn")
+var miner_scene: PackedScene = load("res://scenes/units/miner.tscn")
+var troop_scene: PackedScene = load("res://scenes/units/troop.tscn")
 
 func spawn_worker(player: bool, is_woodsman: bool) -> void:
 	if not player:
 		return
-	var woodhut: Node = get_node_or_null("World/Buildings/Woodhut")
+	var woodhut: Woodhut = get_node_or_null("World/Buildings/Woodhut")
 	if woodhut == null:
 		return
-	var worker: Worker = woodsman_scene.instantiate() if is_woodsman else miner_scene.instantiate()
+	if is_woodsman:
+		# Let the woodhut produce it through its build queue (shows progress).
+		woodhut.add_to_queue()
+		return
+	# Miners have no production building yet, so spawn them directly.
+	var worker: Worker = miner_scene.instantiate()
 	worker.global_position = woodhut.get_node("Door").global_position
 	entities.add_child(worker)
 
@@ -29,7 +34,7 @@ func spawn_troop(player: bool) -> bool:
 		if barracks == null:
 			return false
 		# Let the barracks handle spawning so its production animation plays.
-		barracks.spawn_troop()
+		barracks.add_to_queue()
 		return true
 	else:
 		var portal: Node = get_node_or_null("World/level/Portal")

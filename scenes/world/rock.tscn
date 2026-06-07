@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://r3cche0he1iv"]
 
-[ext_resource type="Script" uid="uid://d2tg4vla3f151" path="res://scripts/rock.gd" id="1_rock"]
+[ext_resource type="Script" uid="uid://d2tg4vla3f151" path="res://scenes/world/rock.gd" id="1_rock"]
 [ext_resource type="Texture2D" uid="uid://utrk5c3bg1d3" path="res://assets/sprites/copper.png" id="2_mek2u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rock"]

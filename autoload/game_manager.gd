@@ -64,7 +64,6 @@ func recruit_troop() -> bool:
 	if gold >= TROOP_COST:
 		gold -= TROOP_COST
 		troop_count += 1
-		gold_income_rate += GOLD_PER_TROOP
 		resources_changed.emit()
 		return true
 	return false

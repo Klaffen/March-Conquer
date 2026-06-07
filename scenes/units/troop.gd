@@ -95,8 +95,8 @@ func _attack() -> void:
 func take_damage(amount: int) -> void:
 	hp -= amount
 	hp_bar.value = hp
-	print(hp_bar.value)
 	if hp <= 0:
+		GameManager.troop_count -= 1
 		queue_free()
 
 func _play_walk_animation(direction: Vector2) -> void:

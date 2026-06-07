@@ -8,6 +8,7 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	hide()
 	GameManager.game_over.connect(_on_game_over)
+	restart_btn.pressed.connect(_on_restart_button_pressed)
 
 func _on_game_over(player_won: bool) -> void:
 	result_label.text = "Victory!" if player_won else "Defeated!"

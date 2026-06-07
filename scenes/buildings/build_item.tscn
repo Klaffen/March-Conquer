@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://fdh4v85gteoe"]
+
+[ext_resource type="Script" uid="uid://bfx16lra1ysix" path="res://scenes/buildings/build_item.gd" id="1_lvg4y"]
+
+[node name="BuildItem" type="Node2D" unique_id=1499535095]
+z_index = 3
+script = ExtResource("1_lvg4y")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1701124266]
+position = Vector2(8, 8)
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=737590496]
+offset_top = 18.0
+offset_right = 16.0
+offset_bottom = 21.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="." unique_id=823315498]
+one_shot = true

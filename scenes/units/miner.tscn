@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://lm8jj0ffu16u"]
 
-[ext_resource type="Script" uid="uid://cb7gklksgydov" path="res://scripts/worker.gd" id="1_qcpy4"]
+[ext_resource type="Script" uid="uid://cb7gklksgydov" path="res://scenes/units/worker.gd" id="1_qcpy4"]
 [ext_resource type="Texture2D" uid="uid://cyfkv0s28dxym" path="res://assets/sprites/npcs/Miner_Mike.png" id="2_qxqb1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hrgr1"]

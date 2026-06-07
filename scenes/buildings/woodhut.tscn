@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://8q1p6u6wv5ag"]
 
-[ext_resource type="Script" uid="uid://cjs2iy4ntbg4w" path="res://scripts/woodhut.gd" id="1_byxdj"]
+[ext_resource type="Script" uid="uid://cjs2iy4ntbg4w" path="res://scenes/buildings/woodhut.gd" id="1_byxdj"]
 [ext_resource type="Texture2D" uid="uid://c8cfbibppl8yr" path="res://assets/sprites/buildings/Shed_Base_Black.png" id="2_2mxdf"]
+[ext_resource type="PackedScene" uid="uid://dln3hhd6mkscf" path="res://scenes/buildings/build_queue.tscn" id="3_mrg83"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2mxdf"]
 size = Vector2(63, 75)
@@ -23,3 +24,6 @@ shape = SubResource("RectangleShape2D_2mxdf")
 
 [node name="Door" type="Node2D" parent="." unique_id=843912747]
 position = Vector2(-8, 38)
+
+[node name="BuildQueue" parent="." unique_id=2122233173 instance=ExtResource("3_mrg83")]
+position = Vector2(-10, -54)

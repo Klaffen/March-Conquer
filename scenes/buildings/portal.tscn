@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cpxhwgjq8jjw1"]
 
-[ext_resource type="Script" uid="uid://ep4k7sosog73" path="res://scripts/portal.gd" id="1_1ffj6"]
+[ext_resource type="Script" uid="uid://ep4k7sosog73" path="res://scenes/buildings/portal.gd" id="1_1ffj6"]
 [ext_resource type="Texture2D" uid="uid://c2m6p62jovm5w" path="res://assets/sprites/buildings/PORTAL BLUE-Sheet.png" id="1_v0xau"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1ffj6"]
@@ -99,5 +99,3 @@ shape = SubResource("RectangleShape2D_1ffj6")
 [node name="SpawnTimer" type="Timer" parent="." unique_id=821517907]
 wait_time = 5.0
 autostart = true
-
-[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

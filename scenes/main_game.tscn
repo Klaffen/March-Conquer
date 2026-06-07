@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://3sd07al0anuc"]
 
 [ext_resource type="PackedScene" uid="uid://c5wbaabu1dk3g" path="res://scenes/level.tscn" id="1_s3esy"]
-[ext_resource type="Script" uid="uid://cqieh77b6oot2" path="res://scripts/main_game.gd" id="1_ygxny"]
-[ext_resource type="Script" uid="uid://bje76sv6dkqfy" path="res://scripts/timer.gd" id="2_72e8q"]
-[ext_resource type="PackedScene" uid="uid://btd0t63shrwcu" path="res://scenes/game_over.tscn" id="2_wi4c7"]
-[ext_resource type="Script" uid="uid://6phq77rll4jv" path="res://scripts/camera_2d.gd" id="3_0rdsr"]
-[ext_resource type="PackedScene" uid="uid://bewdwlqogk20t" path="res://scenes/hud.tscn" id="3_d2op2"]
-[ext_resource type="PackedScene" uid="uid://b0ahy3jwb1gtf" path="res://scenes/woodsman.tscn" id="3_ipu61"]
-[ext_resource type="Script" uid="uid://cadwmjbowvwv3" path="res://scripts/build_placement.gd" id="7_wi4c7"]
+[ext_resource type="Script" uid="uid://cqieh77b6oot2" path="res://scenes/main_game.gd" id="1_ygxny"]
+[ext_resource type="Script" uid="uid://bje76sv6dkqfy" path="res://scenes/timer.gd" id="2_72e8q"]
+[ext_resource type="PackedScene" uid="uid://btd0t63shrwcu" path="res://scenes/ui/game_over.tscn" id="2_wi4c7"]
+[ext_resource type="Script" uid="uid://6phq77rll4jv" path="res://scenes/camera_2d.gd" id="3_0rdsr"]
+[ext_resource type="PackedScene" uid="uid://bewdwlqogk20t" path="res://scenes/ui/hud.tscn" id="3_d2op2"]
+[ext_resource type="PackedScene" uid="uid://b0ahy3jwb1gtf" path="res://scenes/units/woodsman.tscn" id="3_ipu61"]
+[ext_resource type="Script" uid="uid://cadwmjbowvwv3" path="res://scenes/buildings/build_placement.gd" id="7_wi4c7"]
 
 [node name="MainGame" type="Node" unique_id=694198263 node_paths=PackedStringArray("entities")]
 script = ExtResource("1_ygxny")
@@ -17,10 +17,11 @@ entities = NodePath("World/Entities")
 
 [node name="Camera2D" type="Camera2D" parent="World" unique_id=1380735570]
 position = Vector2(300, 300)
-zoom = Vector2(2.5, 2.5)
+zoom = Vector2(2, 2)
 script = ExtResource("3_0rdsr")
 
 [node name="GameOver" parent="World" unique_id=1736609441 instance=ExtResource("2_wi4c7")]
+visible = false
 
 [node name="HUD" parent="World" unique_id=660151423 instance=ExtResource("3_d2op2")]
 
@@ -29,7 +30,7 @@ script = ExtResource("3_0rdsr")
 [node name="Entities" type="Node2D" parent="World" unique_id=1471971090]
 
 [node name="Worker" parent="World/Entities" unique_id=156091574 instance=ExtResource("3_ipu61")]
-position = Vector2(281, 277)
+position = Vector2(346, 346)
 
 [node name="level" parent="World" unique_id=1803735573 instance=ExtResource("1_s3esy")]
 
@@ -39,5 +40,3 @@ script = ExtResource("7_wi4c7")
 [node name="Timer" type="Timer" parent="." unique_id=921066949]
 autostart = true
 script = ExtResource("2_72e8q")
-
-[connection signal="timeout" from="Timer" to="Timer" method="_on_timeout"]

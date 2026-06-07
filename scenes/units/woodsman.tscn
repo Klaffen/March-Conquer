@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b0ahy3jwb1gtf"]
 
-[ext_resource type="Script" uid="uid://cb7gklksgydov" path="res://scripts/worker.gd" id="1_worker"]
+[ext_resource type="Script" uid="uid://cb7gklksgydov" path="res://scenes/units/worker.gd" id="1_worker"]
 [ext_resource type="Texture2D" uid="uid://50g54udrxnnm" path="res://assets/sprites/npcs/Lumberjack_Jack.png" id="2_4n0ys"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sb737"]

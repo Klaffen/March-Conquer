@@ -14,6 +14,7 @@ func _ready() -> void:
 	hp_bar.max_value = max_hp
 	hp_bar.value = hp
 	add_to_group("enemy_castle")
+	$SpawnTimer.timeout.connect(_on_spawn_timer_timeout)
 
 
 func take_damage(amount: int) -> void:

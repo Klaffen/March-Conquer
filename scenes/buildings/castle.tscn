@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://kgcoylj7cki4"]
 
-[ext_resource type="Script" uid="uid://vb8y2gbwm08n" path="res://scripts/castle.gd" id="1_castle"]
+[ext_resource type="Script" uid="uid://vb8y2gbwm08n" path="res://scenes/buildings/castle.gd" id="1_castle"]
 [ext_resource type="Texture2D" uid="uid://b77uo41hjjxt" path="res://assets/sprites/buildings/Inn_Black.png" id="2_0ysgy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_castle"]

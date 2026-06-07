@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c8ugcffir2g02"]
 
-[ext_resource type="Script" uid="uid://b7scehh55r6vd" path="res://scripts/troop.gd" id="1_troop"]
+[ext_resource type="Script" uid="uid://b7scehh55r6vd" path="res://scenes/units/troop.gd" id="1_troop"]
 [ext_resource type="Texture2D" uid="uid://c2up4wej7tay0" path="res://assets/sprites/npcs/Knight-Attack01.png" id="2_irjg1"]
 [ext_resource type="Texture2D" uid="uid://b0pkpig3qyda6" path="res://assets/sprites/npcs/Knight-Death.png" id="2_nrl5u"]
 [ext_resource type="Texture2D" uid="uid://cdqivgf1fmh4w" path="res://assets/sprites/npcs/Knight-Idle.png" id="2_pbcxd"]

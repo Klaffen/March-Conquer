@@ -11,9 +11,11 @@ extends CanvasLayer
 @onready var recruit_woodsman_button: Button = $Buttons/RecruitWoodsmanBtn
 @onready var recruit_miner_button: Button = $Buttons/RecruitMinerBtn
 @onready var recruit_troop_button: Button = $Buttons/RecruitTroopBtn
+@onready var restart_button: Button = $RestartBtn
 
-@export var barracks_scene: PackedScene = load("res://scenes/barracks.tscn")
-@export var woodhut_scene: PackedScene = load("res://scenes/woodhut.tscn")
+@export var barracks_scene: PackedScene = load("res://scenes/buildings/barracks.tscn")
+@export var woodhut_scene: PackedScene = load("res://scenes/buildings/woodhut.tscn")
+
 
 func _ready() -> void:
 	GameManager.resources_changed.connect(_update_display)
@@ -21,7 +23,15 @@ func _ready() -> void:
 	_on_resource_change()
 	GameManager.resources_changed.connect(_on_resource_change)
 
+	recruit_woodsman_button.pressed.connect(_on_recruit_worker_btn_pressed.bind(true))
+	recruit_miner_button.pressed.connect(_on_recruit_worker_btn_pressed.bind(false))
+	build_woodhut_button.pressed.connect(_on_build_building_pressed.bind("woodhut"))
+	build_barracks_button.pressed.connect(_on_build_building_pressed.bind("barracks"))
+	recruit_troop_button.pressed.connect(_on_recruit_troop_pressed)
+	restart_button.pressed.connect(_on_restart_btn_pressed)
+
 	_update_display()
+
 
 func _update_display() -> void:
 	wood_label.text = "Wood: %d" % GameManager.wood

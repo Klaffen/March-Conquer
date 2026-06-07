@@ -47,7 +47,7 @@ func _reset_state() -> void:
 	_is_valid = false
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(_event: InputEvent) -> void:
 	if (_active == false):
 		return
 

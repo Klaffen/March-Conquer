@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bewdwlqogk20t"]
 
-[ext_resource type="Script" uid="uid://dg8w1sy40mbh8" path="res://scripts/hud.gd" id="1_hud"]
+[ext_resource type="Script" uid="uid://dg8w1sy40mbh8" path="res://scenes/ui/hud.gd" id="1_hud"]
 
 [node name="HUD" type="CanvasLayer" unique_id=511919954]
 script = ExtResource("1_hud")
@@ -60,10 +60,3 @@ text = "Build Barracks (10w 5s)"
 layout_mode = 2
 disabled = true
 text = "Recruit Troop (5g)"
-
-[connection signal="pressed" from="RestartBtn" to="." method="_on_restart_btn_pressed"]
-[connection signal="pressed" from="Buttons/RecruitWoodsmanBtn" to="." method="_on_recruit_worker_btn_pressed" binds= [true]]
-[connection signal="pressed" from="Buttons/RecruitMinerBtn" to="." method="_on_recruit_worker_btn_pressed" binds= [false]]
-[connection signal="pressed" from="Buttons/BuildWoodhutBtn" to="." method="_on_build_building_pressed" binds= [&"woodhut"]]
-[connection signal="pressed" from="Buttons/BuildBarracksBtn" to="." method="_on_build_building_pressed" binds= [&"barracks"]]
-[connection signal="pressed" from="Buttons/RecruitTroopBtn" to="." method="_on_recruit_troop_pressed"]

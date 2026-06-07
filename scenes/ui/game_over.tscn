@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://btd0t63shrwcu"]
 
-[ext_resource type="Script" uid="uid://c01lfrus66550" path="res://scripts/game_over.gd" id="1_game_over"]
+[ext_resource type="Script" uid="uid://c01lfrus66550" path="res://scenes/ui/game_over.gd" id="1_game_over"]
 
 [node name="GameOver" type="CanvasLayer" unique_id=1736609441]
 script = ExtResource("1_game_over")
@@ -26,5 +26,3 @@ horizontal_alignment = 1
 [node name="RestartButton" type="Button" parent="Panel/VBox" unique_id=302699157]
 layout_mode = 2
 text = "Play Again"
-
-[connection signal="pressed" from="Panel/VBox/RestartButton" to="." method="_on_restart_button_pressed"]
