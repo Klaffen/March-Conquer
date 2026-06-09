@@ -35,13 +35,15 @@ func _draw() -> void:
 				var top_left: Vector2 = to_local(Pathfinding.cell_to_world(cell)) - size * 0.5
 				draw_rect(Rect2(top_left, size), SOLID_COLOR)
 
-	for troop in get_tree().get_nodes_in_group("player_troops"):
-		_draw_troop_path(troop)
-	for troop in get_tree().get_nodes_in_group("enemy_troops"):
-		_draw_troop_path(troop)
+	for unit in get_tree().get_nodes_in_group("player_troops"):
+		_draw_unit_path(unit)
+	for unit in get_tree().get_nodes_in_group("enemy_troops"):
+		_draw_unit_path(unit)
+	for unit in get_tree().get_nodes_in_group("workers"):
+		_draw_unit_path(unit)
 
-func _draw_troop_path(troop: Node) -> void:
-	var path_value: Variant = troop.get("_path")
+func _draw_unit_path(unit: Node) -> void:
+	var path_value: Variant = unit.get("_path")
 	if not (path_value is PackedVector2Array):
 		return
 	var path: PackedVector2Array = path_value

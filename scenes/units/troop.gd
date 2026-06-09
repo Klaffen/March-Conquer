@@ -33,9 +33,10 @@ func _ready() -> void:
 	hp_bar.modulate = FRIENDLY_COLOR if is_player_troop else ENEMY_COLOR
 	hp_bar.max_value = max_hp
 	add_to_group("player_troops" if is_player_troop else "enemy_troops")
-	# Stagger repaths/retargets so the whole army doesn't recompute on one frame.
-	_repath_timer = randf() * REPATH_INTERVAL
-	_retarget_timer = randf() * RETARGET_INTERVAL
+	# Path/target on the first frame; spawns are staggered in time, so per-unit
+	# repath and retarget cycles stay desynced without an extra random offset.
+	_repath_timer = 0.0
+	_retarget_timer = 0.0
 
 func _physics_process(delta: float) -> void:
 	# Periodically re-pick the nearest target so troops switch to a closer enemy
