@@ -20,6 +20,10 @@ func _ready() -> void:
 	hitbox.input_event.connect(_on_hitbox_input_event)
 	set_selected(false)  # start without an outline, ignoring whatever the scene ships
 
+	# Real buildings are pathfinding obstacles; the placement ghost is not.
+	if not get("ghost"):
+		add_to_group("obstacles")
+
 	if build_queue != null:
 		build_queue.finished_item.connect(_spawn_unit)
 

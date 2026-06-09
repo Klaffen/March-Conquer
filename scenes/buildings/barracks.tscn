@@ -22,7 +22,7 @@ region_enabled = true
 region_rect = Rect2(14, 4, 84, 127)
 
 [node name="SpawnPoint" parent="." index="1" unique_id=1606660329]
-position = Vector2(0, 60)
+position = Vector2(0, 65)
 
 [node name="HitboxShape" parent="Hitbox" parent_id_path=PackedInt32Array(773443357) index="0" unique_id=1044074066]
 position = Vector2(0, 24.5)

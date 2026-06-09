@@ -6,6 +6,10 @@ const DAMAGE: int = 10
 const ATTACK_RANGE: float = 20.0
 const ATTACK_INTERVAL: float = 1.0
 
+const REPATH_INTERVAL: float = 0.5
+const RETARGET_INTERVAL: float = 0.5
+const WAYPOINT_REACHED_DIST: float = 12.0
+
 const FRIENDLY_COLOR: Color = Color("004900")
 const ENEMY_COLOR: Color = Color("a10000")
 
@@ -19,35 +23,72 @@ const ENEMY_COLOR: Color = Color("a10000")
 var hp: int
 var attack_timer: float = 0.0
 var target: Node = null
+var _path: PackedVector2Array = PackedVector2Array()
+var _path_index: int = 0
+var _repath_timer: float = 0.0
+var _retarget_timer: float = 0.0
 
 func _ready() -> void:
 	hp = max_hp
 	hp_bar.modulate = FRIENDLY_COLOR if is_player_troop else ENEMY_COLOR
 	hp_bar.max_value = max_hp
 	add_to_group("player_troops" if is_player_troop else "enemy_troops")
+	# Stagger repaths/retargets so the whole army doesn't recompute on one frame.
+	_repath_timer = randf() * REPATH_INTERVAL
+	_retarget_timer = randf() * RETARGET_INTERVAL
 
 func _physics_process(delta: float) -> void:
-	if target == null or not is_instance_valid(target):
+	# Periodically re-pick the nearest target so troops switch to a closer enemy
+	# (e.g. a freshly spawned unit) instead of fixating on the castle/portal.
+	_retarget_timer -= delta
+	if target == null or not is_instance_valid(target) or _retarget_timer <= 0.0:
+		_retarget_timer = RETARGET_INTERVAL
+		var previous_target: Node = target
 		_find_target()
+		if target != previous_target:
+			_repath_timer = 0.0  # repath immediately toward the new target
 	if target == null:
 		_play_animation("idle", false)
 		return
 
-	# Walk toward the closest point on the target's hitbox, not its center,
-	# so we stop at a building's wall instead of walking into it.
+	# Aim at the closest point on the target's hitbox, not its center, so we stop
+	# at a building's wall instead of walking into it.
 	var aim_point: Vector2 = _aim_point()
 	var to_aim: Vector2 = aim_point - global_position
 	var facing: Vector2 = target.global_position - global_position
+
 	if to_aim.length() <= ATTACK_RANGE:
 		attack_timer += delta
 		if attack_timer >= ATTACK_INTERVAL:
 			attack_timer = 0.0
 			_play_attack_animation(facing)
 			_attack()
-	else:
-		velocity = to_aim.normalized() * SPEED
+		return
+
+	# Follow an A* path around obstacles toward the target.
+	var step_target: Vector2 = _path_step(delta, aim_point)
+	var to_step: Vector2 = step_target - global_position
+	if to_step.length() > 0.5:
+		velocity = to_step.normalized() * SPEED
 		_play_walk_animation(facing)
 		move_and_slide()
+
+# Returns the next world point to steer toward, repathing periodically. Falls back
+# to the aim point directly when no grid path is available (the final approach, or
+# before the grid is built).
+func _path_step(delta: float, aim_point: Vector2) -> Vector2:
+	_repath_timer -= delta
+	if _repath_timer <= 0.0:
+		_repath_timer = REPATH_INTERVAL
+		_path = Pathfinding.find_path(global_position, aim_point)
+		_path_index = 0
+
+	while _path_index < _path.size() and global_position.distance_to(_path[_path_index]) <= WAYPOINT_REACHED_DIST:
+		_path_index += 1
+
+	if _path_index < _path.size():
+		return _path[_path_index]
+	return aim_point
 
 func _find_target() -> void:
 	var enemy_group: String = "enemy_troops" if is_player_troop else "player_troops"

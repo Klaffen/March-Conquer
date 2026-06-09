@@ -14,6 +14,7 @@ func _ready() -> void:
 	hp = max_hp
 	hp_bar.max_value = max_hp
 	hp_bar.value = hp
+	add_to_group("obstacles")
 	if is_player_castle:
 		add_to_group("player_castle")
 	else:

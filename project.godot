@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameManager="*res://autoload/game_manager.gd"
+Pathfinding="*res://autoload/pathfinding.gd"
 
 [display]
 
