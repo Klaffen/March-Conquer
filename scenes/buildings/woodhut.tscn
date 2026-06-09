@@ -1,33 +1,36 @@
-[gd_scene format=3 uid="uid://8q1p6u6wv5ag"]
+[gd_scene format=3 uid="uid://dyox2w74pv1im"]
 
 [ext_resource type="Script" uid="uid://cjs2iy4ntbg4w" path="res://scenes/buildings/woodhut.gd" id="1_byxdj"]
+[ext_resource type="PackedScene" uid="uid://dnuynfu7l0pk7" path="res://scenes/buildings/building.tscn" id="1_jyd2j"]
 [ext_resource type="Texture2D" uid="uid://c8cfbibppl8yr" path="res://assets/sprites/buildings/Shed_Base_Black.png" id="2_2mxdf"]
-[ext_resource type="Shader" uid="uid://d4gxfbd0nvlvn" path="res://shaders/outline.gdshader" id="2_40yeb"]
-[ext_resource type="PackedScene" uid="uid://dln3hhd6mkscf" path="res://scenes/buildings/build_queue.tscn" id="3_mrg83"]
+[ext_resource type="Texture2D" uid="uid://diwwdmnxbiw7g" path="res://assets/sprites/npcs/lumberjack_icon.png" id="3_wxknk"]
+[ext_resource type="Texture2D" uid="uid://dwg0qp0jquerp" path="res://assets/sprites/npcs/miner_icon.png" id="4_vo0kv"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_40yeb"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mrg83"]
+size = Vector2(78, 88)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2mxdf"]
-size = Vector2(63, 75)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_40yeb"]
+size = Vector2(78, 77)
 
-[node name="Woodhut" type="Node2D" unique_id=362822991]
-z_index = 1
-scale = Vector2(0.5, 0.5)
+[node name="Woodhut" unique_id=606553500 instance=ExtResource("1_jyd2j")]
 script = ExtResource("1_byxdj")
-outline = ExtResource("2_40yeb")
+ghost = false
+woodsman_icon = ExtResource("3_wxknk")
+miner_icon = ExtResource("4_vo0kv")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=724555692]
-material = SubResource("ShaderMaterial_40yeb")
+[node name="Sprite2D" parent="." index="0" unique_id=2102689111]
 texture = ExtResource("2_2mxdf")
 
-[node name="Hitbox" type="Area2D" parent="." unique_id=1495347118]
+[node name="SpawnPoint" parent="." index="1" unique_id=1606660329]
+position = Vector2(-7, 39)
 
-[node name="HitboxShape" type="CollisionShape2D" parent="Hitbox" unique_id=662940791]
-position = Vector2(-0.5, 5.5)
-shape = SubResource("RectangleShape2D_2mxdf")
+[node name="HitboxShape" parent="Hitbox" parent_id_path=PackedInt32Array(773443357) index="0" unique_id=1044074066]
+position = Vector2(0, 12)
+shape = SubResource("RectangleShape2D_mrg83")
 
-[node name="Door" type="Node2D" parent="." unique_id=843912747]
-position = Vector2(-8, 38)
+[node name="SolidShape" parent="Solid" parent_id_path=PackedInt32Array(1453864824) index="0" unique_id=1300342961]
+position = Vector2(0, 6.5)
+shape = SubResource("RectangleShape2D_40yeb")
 
-[node name="BuildQueue" parent="." unique_id=2122233173 instance=ExtResource("3_mrg83")]
+[node name="BuildQueue" parent="." index="4" unique_id=432681211]
 position = Vector2(-10, -54)

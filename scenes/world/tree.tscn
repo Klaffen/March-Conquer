@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cnfr0w3a3x5ex"]
 
-[ext_resource type="Texture2D" uid="uid://cjjuwjg2a3164" path="res://assets/sprites/tree.png" id="1_avsvi"]
+[ext_resource type="Texture2D" uid="uid://d1gpglvdh3x36" path="res://assets/sprites/resources/Medium_Oak_Tree.png" id="2_madqg"]
 [ext_resource type="Script" uid="uid://ddfhwchxldpxl" path="res://scenes/world/tree.gd" id="2_tree"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_avsvi"]
@@ -10,7 +10,9 @@ size = Vector2(16, 32)
 script = ExtResource("2_tree")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1558485337]
-texture = ExtResource("1_avsvi")
+texture = ExtResource("2_madqg")
+region_enabled = true
+region_rect = Rect2(37, 3, 23, 34)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1600811499]
 visible = false

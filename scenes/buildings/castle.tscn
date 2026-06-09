@@ -6,6 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_castle"]
 size = Vector2(227, 169.875)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pbpso"]
+size = Vector2(227, 169.875)
+
 [node name="Castle" type="Node2D" unique_id=2037842297]
 script = ExtResource("1_castle")
 
@@ -26,3 +29,10 @@ value = 100.0
 z_index = 1
 position = Vector2(5.5, -5.9375)
 shape = SubResource("RectangleShape2D_castle")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=593545335]
+
+[node name="HitboxShape" type="CollisionShape2D" parent="StaticBody2D" unique_id=1232933634]
+z_index = 1
+position = Vector2(5.5, -5.9375)
+shape = SubResource("RectangleShape2D_pbpso")

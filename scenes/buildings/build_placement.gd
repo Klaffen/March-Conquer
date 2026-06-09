@@ -2,7 +2,10 @@ extends Node2D
 class_name BuildPlacement
 
 @onready var buildings: Node2D = $"../World/Buildings"
+@onready var terrain_layer: TileMapLayer = get_node_or_null("../World/level/Tilemap")
 @export var obstacle_mask: int = 1
+# Building is disallowed on any cell whose terrain has one of these names.
+@export var blocked_terrains: Array[String] = ["path", "water"]
 
 var _active: bool = false
 var _ghost: Node2D = null
@@ -31,6 +34,12 @@ func begin_placement(building_scene: PackedScene, cost: Dictionary, is_player: b
 	var collision_shape: CollisionShape2D = _ghost.get_node("Hitbox/HitboxShape")
 	collision_shape.disabled = true
 
+	# The ghost carries the same Solid body as the real building; disable it so it
+	# doesn't physically block troops while the player is still positioning it.
+	var solid_shape: CollisionShape2D = _ghost.get_node_or_null("Solid/SolidShape")
+	if solid_shape != null:
+		solid_shape.disabled = true
+
 	buildings.add_child(_ghost)
 
 func cancel_placement() -> void:
@@ -58,7 +67,8 @@ func _unhandled_input(_event: InputEvent) -> void:
 	var pos: Vector2 = get_global_mouse_position()
 	_ghost.global_position = pos
 
-	_is_valid = is_footprint_clear(_ghost.get_node("Hitbox/HitboxShape"))
+	var footprint: CollisionShape2D = _ghost.get_node("Hitbox/HitboxShape")
+	_is_valid = is_footprint_clear(footprint) and not _footprint_on_blocked_terrain(footprint)
 
 	if _is_valid and Input.is_action_just_pressed("left_click"):
 		_try_commit()
@@ -78,6 +88,45 @@ func is_footprint_clear(collision_shape: CollisionShape2D) -> bool:
 		if not _ghost.is_ancestor_of(hit.collider):
 			return false
 	return true
+
+# True if any tile under the footprint belongs to a forbidden terrain (path/water).
+# Reads the tilemap directly so it never affects physics or troop movement.
+func _footprint_on_blocked_terrain(shape_node: CollisionShape2D) -> bool:
+	if terrain_layer == null:
+		return false
+	var rect: RectangleShape2D = shape_node.shape as RectangleShape2D
+	if rect == null:
+		return false
+
+	# World-space AABB of the footprint (handles building rotation/scale).
+	var xf: Transform2D = shape_node.global_transform
+	var half: Vector2 = rect.size * 0.5
+	var corners: Array[Vector2] = [
+		xf * Vector2(-half.x, -half.y),
+		xf * Vector2(half.x, -half.y),
+		xf * Vector2(half.x, half.y),
+		xf * Vector2(-half.x, half.y),
+	]
+	var min_world: Vector2 = corners[0]
+	var max_world: Vector2 = corners[0]
+	for corner in corners:
+		min_world = min_world.min(corner)
+		max_world = max_world.max(corner)
+
+	var top_left: Vector2i = terrain_layer.local_to_map(terrain_layer.to_local(min_world))
+	var bottom_right: Vector2i = terrain_layer.local_to_map(terrain_layer.to_local(max_world))
+
+	var tile_set: TileSet = terrain_layer.tile_set
+	for cell_y in range(top_left.y, bottom_right.y + 1):
+		for cell_x in range(top_left.x, bottom_right.x + 1):
+			var data: TileData = terrain_layer.get_cell_tile_data(Vector2i(cell_x, cell_y))
+			if data == null:
+				continue
+			if data.terrain_set < 0 or data.terrain < 0:
+				continue
+			if tile_set.get_terrain_name(data.terrain_set, data.terrain) in blocked_terrains:
+				return true
+	return false
 
 func _try_commit() -> void:
 	if not _is_valid:

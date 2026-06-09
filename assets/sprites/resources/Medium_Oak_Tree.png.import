@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://utrk5c3bg1d3"
-path="res://.godot/imported/copper.png-7e44fb3ceaf7cbd2673aad4df99268d4.ctex"
+uid="uid://d1gpglvdh3x36"
+path="res://.godot/imported/Medium_Oak_Tree.png-021d0f58c3763b51fccab585edd33a33.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/copper.png"
-dest_files=["res://.godot/imported/copper.png-7e44fb3ceaf7cbd2673aad4df99268d4.ctex"]
+source_file="res://assets/sprites/resources/Medium_Oak_Tree.png"
+dest_files=["res://.godot/imported/Medium_Oak_Tree.png-021d0f58c3763b51fccab585edd33a33.ctex"]
 
 [params]
 

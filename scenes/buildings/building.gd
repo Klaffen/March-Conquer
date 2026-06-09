@@ -46,15 +46,15 @@ func set_selected(value: bool) -> void:
 func can_queue() -> bool:
 	return build_queue != null and not build_queue.is_full()
 
-# Spawns the finished unit at the Door and parents it under the world entities.
+# Spawns the finished unit at the spawn point and parents it under the world entities.
 # Override _on_unit_spawned() for building-specific follow-up (animation, income).
 func _spawn_unit(unit_scene: PackedScene) -> void:
 	if unit_scene == null:
 		return
 
 	var unit: Node2D = unit_scene.instantiate()
-	var door: Node2D = get_node_or_null("Door")
-	unit.global_position = door.global_position if door != null else global_position
+	var spawn: Node2D = get_node_or_null("SpawnPoint")
+	unit.global_position = spawn.global_position if spawn != null else global_position
 	get_tree().root.get_node("MainGame/World/Entities").add_child(unit)
 
 	_on_unit_spawned(unit)

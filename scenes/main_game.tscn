@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://btd0t63shrwcu" path="res://scenes/ui/game_over.tscn" id="2_wi4c7"]
 [ext_resource type="Script" uid="uid://6phq77rll4jv" path="res://scenes/camera_2d.gd" id="3_0rdsr"]
 [ext_resource type="PackedScene" uid="uid://bewdwlqogk20t" path="res://scenes/ui/hud.tscn" id="3_d2op2"]
-[ext_resource type="PackedScene" uid="uid://b0ahy3jwb1gtf" path="res://scenes/units/woodsman.tscn" id="3_ipu61"]
 [ext_resource type="Script" uid="uid://cadwmjbowvwv3" path="res://scenes/buildings/build_placement.gd" id="7_wi4c7"]
 [ext_resource type="Script" uid="uid://35rk3teamqv5" path="res://scenes/ui/selector.gd" id="8_sel"]
 
@@ -29,9 +28,6 @@ visible = false
 [node name="Buildings" type="Node2D" parent="World" unique_id=158695279]
 
 [node name="Entities" type="Node2D" parent="World" unique_id=1471971090]
-
-[node name="Worker" parent="World/Entities" unique_id=156091574 instance=ExtResource("3_ipu61")]
-position = Vector2(346, 346)
 
 [node name="level" parent="World" unique_id=1803735573 instance=ExtResource("1_s3esy")]
 

@@ -1,35 +1,36 @@
-[gd_scene format=3 uid="uid://dsf8mt3gjanv4"]
+[gd_scene format=3 uid="uid://cbb8fqwjv8bc"]
 
+[ext_resource type="PackedScene" uid="uid://dnuynfu7l0pk7" path="res://scenes/buildings/building.tscn" id="1_hv4qf"]
 [ext_resource type="Script" uid="uid://ueklf6w0638l" path="res://scenes/buildings/barracks.gd" id="1_i88yw"]
 [ext_resource type="Texture2D" uid="uid://gkmo6pkhfvh4" path="res://assets/sprites/npcs/knight_icon.png" id="2_lc585"]
-[ext_resource type="Texture2D" uid="uid://v4hg2kyk3efk" path="res://assets/sprites/buildings/Church_Black.png" id="2_mm6or"]
-[ext_resource type="PackedScene" uid="uid://dln3hhd6mkscf" path="res://scenes/buildings/build_queue.tscn" id="3_mm6or"]
+[ext_resource type="Texture2D" uid="uid://v4hg2kyk3efk" path="res://assets/sprites/buildings/Church_Black.png" id="3_mm6or"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lc585"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mm6or"]
+size = Vector2(78, 105)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lery3"]
-size = Vector2(90, 100)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lc585"]
+size = Vector2(78, 90)
 
-[node name="Barracks" type="Node2D" unique_id=1397127250]
-z_index = 1
-scale = Vector2(0.5, 0.5)
+[node name="Barracks" unique_id=606553500 instance=ExtResource("1_hv4qf")]
 script = ExtResource("1_i88yw")
+ghost = false
 knight_icon = ExtResource("2_lc585")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1918388738]
-material = SubResource("ShaderMaterial_lc585")
-texture = ExtResource("2_mm6or")
+[node name="Sprite2D" parent="." index="0" unique_id=2102689111]
+texture = ExtResource("3_mm6or")
 region_enabled = true
-region_rect = Rect2(0, 0, 114.846436, 144)
+region_rect = Rect2(14, 4, 84, 127)
 
-[node name="Door" type="Node2D" parent="." unique_id=2006624183]
-position = Vector2(-2, 54)
+[node name="SpawnPoint" parent="." index="1" unique_id=1606660329]
+position = Vector2(0, 60)
 
-[node name="Hitbox" type="Area2D" parent="." unique_id=1588180828]
+[node name="HitboxShape" parent="Hitbox" parent_id_path=PackedInt32Array(773443357) index="0" unique_id=1044074066]
+position = Vector2(0, 24.5)
+shape = SubResource("RectangleShape2D_mm6or")
 
-[node name="HitboxShape" type="CollisionShape2D" parent="Hitbox" unique_id=465334564]
-position = Vector2(-1, 12)
-shape = SubResource("RectangleShape2D_lery3")
+[node name="SolidShape" parent="Solid" parent_id_path=PackedInt32Array(1453864824) index="0" unique_id=1300342961]
+position = Vector2(0, 17)
+shape = SubResource("RectangleShape2D_lc585")
 
-[node name="BuildQueue" parent="." unique_id=1917607604 instance=ExtResource("3_mm6or")]
+[node name="BuildQueue" parent="." index="4" unique_id=432681211]
 position = Vector2(-12, -70)

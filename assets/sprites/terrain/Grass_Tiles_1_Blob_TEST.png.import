@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bk3f64j5bhrfq"
-path="res://.godot/imported/Ores.png-a0a115bdbc4f8cbfd0eddc77931b0d4c.ctex"
+uid="uid://chrb1hw310o20"
+path="res://.godot/imported/Grass_Tiles_1_Blob_TEST.png-463cb1dff8067664017f1172f9f9cf64.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Ores.png"
-dest_files=["res://.godot/imported/Ores.png-a0a115bdbc4f8cbfd0eddc77931b0d4c.ctex"]
+source_file="res://assets/sprites/terrain/Grass_Tiles_1_Blob_TEST.png"
+dest_files=["res://.godot/imported/Grass_Tiles_1_Blob_TEST.png-463cb1dff8067664017f1172f9f9cf64.ctex"]
 
 [params]
 

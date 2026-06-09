@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dnuynfu7l0pk7"]
+
+[ext_resource type="Script" uid="uid://duw6aa7u21xoc" path="res://scenes/buildings/building.gd" id="1_building"]
+[ext_resource type="PackedScene" uid="uid://dln3hhd6mkscf" path="res://scenes/buildings/build_queue.tscn" id="2_queue"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_base"]
+size = Vector2(64, 64)
+
+[node name="Building" type="Node2D" unique_id=606553500]
+z_index = 1
+script = ExtResource("1_building")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2102689111]
+
+[node name="SpawnPoint" type="Node2D" parent="." unique_id=1606660329]
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=773443357]
+
+[node name="HitboxShape" type="CollisionShape2D" parent="Hitbox" unique_id=1044074066]
+shape = SubResource("RectangleShape2D_base")
+
+[node name="Solid" type="StaticBody2D" parent="." unique_id=1453864824]
+
+[node name="SolidShape" type="CollisionShape2D" parent="Solid" unique_id=1300342961]
+shape = SubResource("RectangleShape2D_base")
+
+[node name="BuildQueue" parent="." unique_id=432681211 instance=ExtResource("2_queue")]
